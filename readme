@@ -1,0 +1,5 @@
+This is a hacking for lawyers class.
+
+Topics Covered
+## SQL Injection
+There is a sql injection issue with the users table. Where a Union and a select statement can bring back the whole table of users.

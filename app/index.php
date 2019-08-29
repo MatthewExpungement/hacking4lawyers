@@ -7,7 +7,6 @@ echo "Hacking for lawyers";
 <head>
 </head>
 <body>
-//Add an 
 <script>
 
 </script>
