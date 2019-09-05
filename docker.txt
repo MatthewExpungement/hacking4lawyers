@@ -1,1 +1,2 @@
 docker run -dit -p "80:80" -p 443:443 -p 3306:3306 -v ${PWD}/app:/app -v ${PWD}/mysql:/var/lib/mysql mattrayner/lamp:latest-1804-php7
+//Login for the phpmyadmin admin/aIqFYYGV32fK
