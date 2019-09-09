@@ -25,13 +25,13 @@ if(isset($_POST['username'])){
         <div class="form-group">
         <form method="post" action="create.php">
         <label for "username">Username:</label><br>
-  <input type="text" id="username" name="username" value="" class="form-control">
+  <input type="text" id="username" name="username" class="form-control">
   <br>
   <label for "password">Password:</label><br>
-  <input type="text" id="password" name="password" value="" class="form-control">
+  <input type="text" id="password" name="password" class="form-control">
   <br>
   <label for "email">Email:</label><br>
-  <input type="text" id = "email" name="email" value="" class="form-control">
+  <input type="text" id = "email" name="email" class="form-control">
   <br><br>
   <button type="submit" class="btn btn-primary">Create</button>
 
