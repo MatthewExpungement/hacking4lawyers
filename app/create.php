@@ -5,7 +5,7 @@ if(isset($_COOKIE['username'])){
 }
 
 if(isset($_POST['username'])){
-    $sql = "INSERT INTO users (username,password,email) VALUES('" . $_POST['username'] . "','" . $_POST['password'] . "','" . $_POST['email'] . "')";
+    $sql = "INSERT INTO users (username,password,email) VALUES('" . $_POST['username'] . "','" . md5($_POST['password']) . "','" . $_POST['email'] . "')";
     if ($connection->query($sql) === TRUE) {
         setcookie("username",$_POST['username']);
         header("Location: blog.php");
