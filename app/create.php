@@ -1,29 +1,41 @@
 <?php
-if(isset($_POST['username'])){
-    $connection = new mysqli('localhost', 'root', '','websitedata') or die("Can't connect to server. Please check credentials and try again");
-    if ($connection->connect_errno) {
-        echo "Failed to connect to MySQL: " . $connection->connect_error;
-        die();
-    }
-    $sql = "INSERT INTO users (username,password,email) VALUES('" . $_POST['username'] . "','" . $_POST['password'] . "','" . $_POST['email'] . "')";
+require "sql.php";
+if(isset($_COOKIE['username'])){
+    header("Location: blog.php");
+}
 
+if(isset($_POST['username'])){
+    $sql = "INSERT INTO users (username,password,email) VALUES('" . $_POST['username'] . "','" . $_POST['password'] . "','" . $_POST['email'] . "')";
     if ($connection->query($sql) === TRUE) {
-        echo "New record created successfully";
+        setcookie("username",$_POST['username']);
+        header("Location: blog.php");
     } else {
         echo "Error: " . $sql . "<br>" . $connection->error;
     }
 }else{
-  echo '<form method="post" action="create.php">
-  Username:<br>
-  <input type="text" name="username" value="">
+    require "header.html";
+  echo '  <header class="bg-primary text-white">
+  <div class="container text-center">
+    <h1>Create an Account</h1>
+  </div>
+</header>
+  <div class="container">
+      <div class="row">
+        <div class="col-lg-10 mx-auto">
+        <div class="form-group">
+        <form method="post" action="create.php">
+        <label for "username">Username:</label><br>
+  <input type="text" id="username" name="username" value="" class="form-control">
   <br>
-  Password:<br>
-  <input type="text" name="password" value="">
+  <label for "password">Password:</label><br>
+  <input type="text" id="password" name="password" value="" class="form-control">
   <br>
-  Email:<br>
-  <input type="text" name="email" value="">
+  <label for "email">Email:</label><br>
+  <input type="text" id = "email" name="email" value="" class="form-control">
   <br><br>
-  <input type="submit" value="Submit">
-</form>';
+  <button type="submit" class="btn btn-primary">Create</button>
+
+</form></div></div></div></div>';
 }
+require "footer.html";
 ?>
