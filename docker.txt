@@ -4,4 +4,3 @@ docker run -dit -p "80:80" -p 3306:3306 -v ${PWD}/app:/app -v ${PWD}/mysql:/var/
 
 ////Login for the phpmyadmin admin/aIqFYYGV32fK
 //Login for the phpmyadmin admin/aIqFYYGV32fK
-//c1NtB2LcW2sm

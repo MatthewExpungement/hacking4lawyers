@@ -14,7 +14,7 @@ and upload the sql file named websitedata.sql as a new database.
 
 
 # Topics Covered
-##Case Search Page
+## Case Search Page
 
 ### Case Search JavaScript Manipulation
 
