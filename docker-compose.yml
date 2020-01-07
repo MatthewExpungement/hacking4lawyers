@@ -1,0 +1,19 @@
+version: '3.7'
+services:
+    webapp: 
+        build:
+            context: .
+            dockerfile: Dockerfile
+        environment:
+            - MYSQL_USER_NAME=mysql
+            - MYSQL_USER_DB=mysql
+            - MYSQL_USER_PASS=mysql
+        ports:
+            - "7070:80"
+        volumes:
+            - type: bind
+              source: ./app
+              target: /app
+            - type: bind
+              source: ./mysql
+              target: /var/lib/mysql
