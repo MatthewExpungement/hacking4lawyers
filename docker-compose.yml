@@ -9,11 +9,10 @@ services:
             - MYSQL_USER_DB=mysql
             - MYSQL_USER_PASS=mysql
         ports:
-            - "7070:80"
+            - "80:80"
+            - "443:443"
+            - "3306:3306"
         volumes:
             - type: bind
               source: ./app
               target: /app
-            - type: bind
-              source: ./mysql
-              target: /var/lib/mysql

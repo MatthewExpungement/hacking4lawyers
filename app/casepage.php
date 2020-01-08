@@ -86,8 +86,9 @@ if(!isset($_GET['casenumber'])){
                 echo "<br><span class='text-primary font-weight-bold'>Defendant Address: </span><span id='defendant_address'>" . $results[0]['Defendant_Address']. "</span>";
                 echo "<hr>";
                 echo "<h3>Case Information</h3>";
+
                 echo "<br><span class='text-primary font-weight-bold'>Hearing Date: </span><span id='hearing_date'>" . $results[0]['Hearing_Date']. "</span>";
-                echo "<br><span class='text-primary font-weight-bold'>Case Description: </span><span id='case_description>" . $results[0]['Case_Description']. "</span>";
+                echo "<br><span class='text-primary font-weight-bold'>Case Description: </span><span id='case_description'>" . $results[0]['Case_Description']. "</span>";
                 $result->free();
             }
         }else{

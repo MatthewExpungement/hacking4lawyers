@@ -3,14 +3,18 @@
 ## Running the Site
 The website is in docker and uses the mattrayner lamp stack. Run the code below to launch the site 
 ```
-docker run -dit -p 80:80 -p 3306:3306 -v ${PWD}/app:/app -v ${PWD}/mysql:/var/lib/mysql mattrayner/lamp:latest-1804-php7
+docker-compose build
 ```
 If you don't want to have a permanent mysql db outside the container then get rid of the second -v tag.
 ```
-docker run -dit -p 80:80 -p 3306:3306 -v ${PWD}/app:/app mattrayner/lamp:latest-1804-php7
+docker-compose up -d
 ```
-I don't have a script to automatically upload the mysql data. Look at the logs from the docker build to get the phpmyadmin password
-and upload the sql file named websitedata.sql as a new database.
+There is a shell script in the app folder called create_sql.sh. This will drop the websitedata table if it exists and reinstall from a sql file in the mysql_tables folder in app.
+```
+docker exec -it hacking4lawyers_webapp_1 bash
+cd app
+bash create_sql.sh 
+```
 
 
 # Topics Covered

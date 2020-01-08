@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 01, 2019 at 09:03 PM
+-- Generation Time: Jan 08, 2020 at 01:40 AM
 -- Server version: 5.7.26-0ubuntu0.18.04.1-log
 -- PHP Version: 7.3.6-1+ubuntu18.04.1+deb.sury.org+1
 
@@ -30,6 +30,7 @@ USE `websitedata`;
 -- Table structure for table `blogposts`
 --
 
+DROP TABLE IF EXISTS `blogposts`;
 CREATE TABLE `blogposts` (
   `ID` int(11) NOT NULL,
   `blogtitle` varchar(100) NOT NULL,
@@ -45,11 +46,7 @@ CREATE TABLE `blogposts` (
 INSERT INTO `blogposts` (`ID`, `blogtitle`, `blogpost`, `username`, `Timestamp`) VALUES
 (1, 'First Post', 'Hi everyone this is my first post!', 'testuser', '2019-09-10 16:01:48'),
 (2, 'Law Update', 'Hey everyone here is my update on the new expungement law.', 'attorney1', '2019-09-10 16:05:49'),
-(3, 'Hi this attorney 1', 'This is the real attorney!', 'attorney1', '2019-09-10 19:19:29'),
-(6, 'HI everyone', 'js removed', 'admin', '2019-09-10 19:35:42'),
-(7, 'Hello New Orleans!', '<iframe src=\"https://www.youtube.com/embed/DLzxrzFCyOs\" width=\"420\" height=\"315\" frameborder=\"0\" allowfullscreen=\"\"></iframe>', 'admin', '2019-09-10 19:37:34'),
-(8, 'testuser is working again!', 'The testuser account is working again for anyone that would like to play around.  I also removed the javascript that was resetting the passwords so we should be good there. - Buddy Black', 'BuddyBlack', '2019-09-11 00:27:50'),
-(9, 'Thanks Buddy Black', 'Hey Buddy Black thanks for taking care of that! Glad you like the website!', 'mstubenberg', '2019-09-12 20:19:10');
+(3, 'Hi this attorney 1', 'This is the real attorney!', 'attorney1', '2019-09-10 19:19:29');
 
 -- --------------------------------------------------------
 
@@ -57,6 +54,7 @@ INSERT INTO `blogposts` (`ID`, `blogtitle`, `blogpost`, `username`, `Timestamp`)
 -- Table structure for table `casedata`
 --
 
+DROP TABLE IF EXISTS `casedata`;
 CREATE TABLE `casedata` (
   `Case_Number` varchar(500) NOT NULL,
   `Case_Type` varchar(500) NOT NULL,
@@ -582,6 +580,7 @@ INSERT INTO `casedata` (`Case_Number`, `Case_Type`, `Plaintiff_Name`, `Plaintiff
 -- Table structure for table `users`
 --
 
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `ID` int(11) NOT NULL,
   `username` varchar(500) NOT NULL,
@@ -595,15 +594,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`ID`, `username`, `password`, `email`) VALUES
 (1, 'testuser', '5f4dcc3b5aa765d61d8327deb882cf99', 'test@gmail.com'),
-(2, 'admin', 'a61a78e492ee60c63ed8f2bb3a6a0072', 'admin@intakevault.com'),
-(3, 'attorney1', 'd8578edf8458ce06fbc5bb76a58c5ca4', 'attorney1@hotmail.com'),
-(4, 'mud', 'ca5c99096ec6e4232e88a16853200327', 'muduser@mud.com'),
-(5, '${}', 'a61a78e492ee60c63ed8f2bb3a6a0072', ''),
-(6, '', 'a61a78e492ee60c63ed8f2bb3a6a0072', ''),
-(7, '', 'a61a78e492ee60c63ed8f2bb3a6a0072', ' '),
-(8, ' ', 'a61a78e492ee60c63ed8f2bb3a6a0072', ' '),
-(9, 'BuddyBlack', '098f6bcd4621d373cade4e832627b4f6', 'root@localhost'),
-(10, 'mstubenberg', '7c6a180b36896a0a8c02787eeafb0e4c', 'test@gmail.com');
+(2, 'attorney1', '5f4dcc3b5aa765d61d8327deb882cf99', 'attorney1@hotmail.com'),
+(3, 'admin', '5f4dcc3b5aa765d61d8327deb882cf99', 'admin@admin.com');
 
 --
 -- Indexes for dumped tables
@@ -635,7 +627,7 @@ ALTER TABLE `blogposts`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
