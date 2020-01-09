@@ -33,7 +33,7 @@ require('header.html');
               </textarea>
               <small id="emailHelp" class="form-text text-muted">You might include very personal information about a client in a petition to a court.</small>
               <br><br>
-              <button type="submit" class="btn btn-primary">Search</button>
+              <button type="submit" class="btn btn-primary">Generate</button>
             </form>
           </div>
       </div>
