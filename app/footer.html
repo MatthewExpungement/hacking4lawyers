@@ -15,7 +15,34 @@
 
   <!-- Custom JavaScript for this theme -->
   <script src="js/scrolling-nav.js"></script>
-
+  <script>
+      function validateEmail(email){
+          var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          return re.test(String(email).toLowerCase());
+      }
+      $(document).ready(function(){
+          $("#create").click(function(e){
+              var email = $("#email").val();
+              var username = $("#username").val();
+              var password = $("#password").val();
+              if (username.length == 0){
+                  alert("You must enter a username.");
+                  e.preventDefault();
+                  return false;
+              }
+              if (password.length == 0){
+                  alert("You must enter a password.");
+                  e.preventDefault();
+                  return false;
+              }
+              if (!validateEmail(email)){
+                  alert("You must enter a valid e-mail address.");
+                  e.preventDefault();
+                  return false;
+              }
+          });
+      });
+  </script>
 </body>
 
 </html>

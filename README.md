@@ -82,9 +82,31 @@ Get all the users information using ID
 ```
 fakeuser' UNION ALL SELECT username,password FROM users WHERE ID = '2
 ```
+
+### Bypass JavaScript input validation
+
+On the user registration page, when the user clicks "Create," an error
+message will appear if the username field is empty, if the password is
+empty, or if the e-mail address is not a valid e-mail address.
+
+If the user uses "Inspect" to look at the "Create" button, he or she
+will see that there is an "event" attached to the button, and the
+button has the id `create`.  The user can also see from the page
+source that the site uses JQuery.
+
+To get around client-side input validation, enter the following into
+the JavaScript Console.
+
+```
+$("#create").off();
+```
+
+Then click the "Create" button.
+
 ### JavaScript Injection
 
-You can add javascript directly into the text box for a post which is then executed by the users browser.
+You can add javascript directly into the text box for a post which is
+then executed by the users browser.
 
 Testing if it's possible
 ```
