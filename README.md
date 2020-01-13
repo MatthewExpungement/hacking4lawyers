@@ -137,6 +137,29 @@ Note: This one should be dropped as an example because it then prohibits any of 
     </script>
 ```
 
+## Cracking Passwords 
+This is all on the pass_cracker folder.
+
+### Encrypting passwords
+
+`passwords.txt` has a list of passwords that people might use. (well, hopefully not, because they're extra weak for demonstration purposes)
+
+Use `hash.sh` to encrypt passwords with the (very insecure, so only for demo purposes) md5 algorithm. 
+
+```./hash.sh```
+
+The new `secrets.md5` file is the hashed version of the passwords. 
+
+### Decrypting them
+
+Run `./dehash.sh`. 
+
+This compares the hashes of the words in `wordlist.txt` to the hashes in `secrets.md5`. 
+
+If `hashcat` can find a word in `wordlist.txt` with a hash that matches one in `secrets.md5`, it knows that hash came from the word in the wordlist.
+
+
+
 ## To Do:
 1. I think the blog site should have additional options if the user is "admin". Then using the cookie trick you can log in as admin and delete posts.
 2. I think real world examples of each of these would be useful. Show an example then show a news clip of a company that actually had this vulnerability.
