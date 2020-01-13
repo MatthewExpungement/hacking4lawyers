@@ -36,17 +36,17 @@ $_GET['casenumber'] = "fakecasenumber'; GRANT ALL PRIVILEGES ON *.* TO 'hackerma
 //Reset the name for case 19C934903
 UPDATE `casedata` SET Defendant_Name = 'Larry David' WHERE Case_Number = '12C934903'
 */
-include "sql.php";
+include "../sql.php";
 //$_GET['casenumber'] = "fakecasenumber'; GRANT ALL PRIVILEGES ON *.* TO 'hackerman'@'localhost' IDENTIFIED BY 'password2";
 
 //$_GET['casenumber'] = '12C934903';
 if(!isset($_GET['casenumber'])){
-    //Send to casesearch.php
-    header("Location: casesearch.php");
+    //Send to index.php
+    header("Location: index.php");
     //echo "No case number";
-   // header("Location: casesearch.php");
+   // header("Location: index.php");
 }else{
-    require('header.html');
+    require('../resources/header.html');
     ?>
 <div class='container'>
   <div class="row text-center">
@@ -106,25 +106,30 @@ if(!isset($_GET['casenumber'])){
   <div class="row text-left">
     <div class="col-lg-12 mx-auto">
         <hr>
-      <h2 class='text-primary'>Hacker Help</h2>
-      <p>The information below might help you in your hacking</p>
-      <span class='text-primary font-weight-bold'>SQL Query</span>
-       <p><?php echo $sqlquery?></p>
-       <?php
-       if($sqlerrormessage!== False){
-           echo "<span class='text-primary font-weight-bold'>SQL Error:</span>";
-           echo "<p>" . $sqlerrormessage . "</p>";
-       }else{
-        echo "<span class='text-primary font-weight-bold'>Returned Array:</span>";
-        echo "<pre>";
-        print_r($returnedarray);
-        echo "</pre>";
-       }
-       ?>
+      
+      <button class='btn btn-primary' data-toggle="collapse" data-target="#hackerhelp">Click For Hacker Help</button>
+      <div id="hackerhelp" class="collapse">
+        <p>The information below might help you in your hacking</p>
+        <span class='text-primary font-weight-bold'>SQL Query Being Used By The Site</span>
+        <p><?php echo $sqlquery?></p>
+        <?php
+        if($sqlerrormessage!== False){
+            echo "<span class='text-primary font-weight-bold'>SQL Error:</span>";
+            echo "<p>" . $sqlerrormessage . "</p>";
+        }else{
+          echo "<span class='text-primary font-weight-bold'>Returned Array:</span>";
+          echo "<pre>";
+          print_r($returnedarray);
+          echo "</pre>";
+        }
+        ?>
+      </div>
+      </br>
+      </br>
     </div>
   </div>
 </div>
 <?php
-require footer.html
+require "../resources/footer.html";
 
 ?>

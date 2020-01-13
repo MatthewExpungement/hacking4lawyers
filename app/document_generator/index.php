@@ -1,5 +1,5 @@
 <?php
-require('header.html');
+require('../resources/header.html');
 ?>
 <div class='container'>
   <div class="row text-center">
@@ -19,7 +19,7 @@ require('header.html');
         <div class="col-lg-8 mx-auto">
           <div class="form-group">
             <h2> Create your super secret petition </h2>
-            <form method = "POST" action="documentgenerator.php">
+            <form method = "POST" action="index.php">
               <label for "filename">File name</label><br>
               <input type="text" name="filename" id="filename" value="Example.txt" class="form-control"><br> 
               <label for "petitiondata">Petition:</label><br>
@@ -33,7 +33,7 @@ require('header.html');
               </textarea>
               <small id="emailHelp" class="form-text text-muted">You might include very personal information about a client in a petition to a court.</small>
               <br><br>
-              <button type="submit" class="btn btn-primary">Search</button>
+              <button type="submit" class="btn btn-primary">Generate</button>
             </form>
           </div>
       </div>

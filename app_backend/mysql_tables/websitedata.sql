@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 08, 2020 at 01:40 AM
+-- Generation Time: Jan 13, 2020 at 01:09 AM
 -- Server version: 5.7.26-0ubuntu0.18.04.1-log
 -- PHP Version: 7.3.6-1+ubuntu18.04.1+deb.sury.org+1
 
@@ -30,7 +30,6 @@ USE `websitedata`;
 -- Table structure for table `blogposts`
 --
 
-DROP TABLE IF EXISTS `blogposts`;
 CREATE TABLE `blogposts` (
   `ID` int(11) NOT NULL,
   `blogtitle` varchar(100) NOT NULL,
@@ -46,7 +45,8 @@ CREATE TABLE `blogposts` (
 INSERT INTO `blogposts` (`ID`, `blogtitle`, `blogpost`, `username`, `Timestamp`) VALUES
 (1, 'First Post', 'Hi everyone this is my first post!', 'testuser', '2019-09-10 16:01:48'),
 (2, 'Law Update', 'Hey everyone here is my update on the new expungement law.', 'attorney1', '2019-09-10 16:05:49'),
-(3, 'Hi this attorney 1', 'This is the real attorney!', 'attorney1', '2019-09-10 19:19:29');
+(4, 'Real News', 'I have the real news about the deep court.', 'LegalQAnon', '2020-01-13 01:06:04'),
+(5, 'Tort Referral', 'I am the best at all tort cases. Refer the case to me and I will give you all my criminal cases.', 'LegalHammer', '2020-01-13 01:08:38');
 
 -- --------------------------------------------------------
 
@@ -54,7 +54,6 @@ INSERT INTO `blogposts` (`ID`, `blogtitle`, `blogpost`, `username`, `Timestamp`)
 -- Table structure for table `casedata`
 --
 
-DROP TABLE IF EXISTS `casedata`;
 CREATE TABLE `casedata` (
   `Case_Number` varchar(500) NOT NULL,
   `Case_Type` varchar(500) NOT NULL,
@@ -580,7 +579,6 @@ INSERT INTO `casedata` (`Case_Number`, `Case_Type`, `Plaintiff_Name`, `Plaintiff
 -- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `ID` int(11) NOT NULL,
   `username` varchar(500) NOT NULL,
@@ -595,7 +593,9 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`ID`, `username`, `password`, `email`) VALUES
 (1, 'testuser', '5f4dcc3b5aa765d61d8327deb882cf99', 'test@gmail.com'),
 (2, 'attorney1', '5f4dcc3b5aa765d61d8327deb882cf99', 'attorney1@hotmail.com'),
-(3, 'admin', '5f4dcc3b5aa765d61d8327deb882cf99', 'admin@admin.com');
+(3, 'admin', '5f4dcc3b5aa765d61d8327deb882cf99', 'admin@admin.com'),
+(4, 'LegalHammer', '8afa847f50a716e64932d995c8e7435a', 'legalhammer@gmail.com'),
+(5, 'LegalQAnon', 'e99a18c428cb38d5f260853678922e03', 'Qanon@gmail.com');
 
 --
 -- Indexes for dumped tables
@@ -621,13 +621,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `blogposts`
 --
 ALTER TABLE `blogposts`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

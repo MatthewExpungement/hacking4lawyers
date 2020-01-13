@@ -1,11 +1,11 @@
 <?php
-require "sql.php";
+require "../sql.php";
 
 
 if(!isset($_GET['lastname'])){
-    header("Location: casesearch.php");
+    header("Location: index.php");
 }
-require('header.html');
+require('../resources/header.html');
 ?>
 <div class='container'>
   <div class="row text-center">
@@ -59,5 +59,5 @@ $sqlquery = "SELECT Case_Number,Case_Type,Plaintiff_Name,Defendant_Name,Hearing_
 </div>
 </div>
 <?php
-require('footer.html');
+require('../resources/footer.html');
 ?>

@@ -12,7 +12,7 @@ docker-compose up -d
 There is a shell script in the app folder called create_sql.sh. This will drop the websitedata table if it exists and reinstall from a sql file in the mysql_tables folder in app.
 ```
 docker exec -it hacking4lawyers_webapp_1 bash
-cd app
+cd app_backend
 bash create_sql.sh 
 ```
 
@@ -55,6 +55,7 @@ Step 7: We can update the defendants name to something else
 fakecasenumber'; UPDATE casedata SET Defendant_Name = 'John Smith' WHERE Case_Number = '12C934910
 
 Step 8: We can wipe out all the data using truncate.
+//Please don't do during a live demo!
 fakecasenumber'; TRUNCATE casedata; SELECT * FROM casedata WHERE Case_Number = '12C9349010
 
 Step 9: Finally we can create a new user so we can simply login ourselves to more directly control the mysql server.
