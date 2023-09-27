@@ -74,21 +74,22 @@ if(!isset($_GET['casenumber'])){
                 //print_r($results[0]);
                 $returnedarray = $results;
                 echo "<h3>Case Information</h3>";
-                echo "<span class='text-primary font-weight-bold'>Case Number:</span><span id='casenumber'> " . $results[0]['Case_Number'] ."</span>";
-                echo "<br><span class='text-primary font-weight-bold'>Case Type:</span><span id='case_type'> " . $results[0]['Case_Type'] . "</span>";
+                echo "<span class='text-primary font-weight-bold'>Case Number:</span><span id='casenumber'> " . $results[0]['Case_Number'] ."</span>\n";
+                echo "<br><span class='text-primary font-weight-bold'>Case Type:</span><span id='case_type'> " . $results[0]['Case_Type'] . "</span>\n";
                 echo "<hr>";
                 echo "<h3>Party Information</h3>";
-                echo "<br><span class='text-primary font-weight-bold'>Plaintiff Name: </span><span id='plaintiff_name'>" . $results[0]['Plaintiff_Name']. "</span>";
+                echo "<br><span class='text-primary font-weight-bold'>Plaintiff Name: </span><span id='plaintiff_name'>" . $results[0]['Plaintiff_Name']. "</span>\n";
                 if($results[0]['Case_Type'] != 'Domestic Violence'){
-                    echo "<br><span class='text-primary font-weight-bold'>Plaintiff Address: </span><span id='plaintiff_address'>" . $results[0]['Plaintiff_Address']. "</span>";
+                    echo "<br><span class='text-primary font-weight-bold'>Plaintiff Address: </span><span id='plaintiff_address'>" . $results[0]['Plaintiff_Address']. "</span>\n";
                 }
-                echo "<br><span class='text-primary font-weight-bold'>Defendant Name: </span><span id='defendant_name'>" . $results[0]['Defendant_Name']. "</span>";
-                echo "<br><span class='text-primary font-weight-bold'>Defendant Address: </span><span id='defendant_address'>" . $results[0]['Defendant_Address']. "</span>";
+                echo "<br><span class='text-primary font-weight-bold'>Defendant Name: </span><span id='defendant_name'>" . $results[0]['Defendant_Name']. "</span>\n";
+                echo "<br><span class='text-primary font-weight-bold'>Defendant Address: </span><span id='defendant_address'>" . $results[0]['Defendant_Address']. "</span>\n";
                 echo "<hr>";
                 echo "<h3>Case Information</h3>";
 
-                echo "<br><span class='text-primary font-weight-bold'>Hearing Date: </span><span id='hearing_date'>" . $results[0]['Hearing_Date']. "</span>";
-                echo "<br><span class='text-primary font-weight-bold'>Case Description: </span><span id='case_description'>" . $results[0]['Case_Description']. "</span>";
+                echo "<br><span class='text-primary font-weight-bold'>Hearing Date: </span><span id='hearing_date'>" . $results[0]['Hearing_Date']. "</span>\n";
+                echo "<br><span class='text-primary font-weight-bold'>Case Description: </span><span id='case_description'>" . $results[0]['Case_Description']. "</span>\n";
+                print "<!--Judge Name: " . $results[0]['Judge'] . " DO NOT MAKE PUBLIC-->";
                 $result->free();
             }
         }else{
@@ -101,6 +102,10 @@ if(!isset($_GET['casenumber'])){
 ?>
 </div>
 </div>
+<hr>
+</br>
+<span class='text-primary font-weight-bold'>Chief Judge Matthew's Wise Words: </span><span id='wise_quote'>New lawyers, listen up: A smartphone in your hand is worth two law books on your shelf. </span>
+
 </div>
 <div class='container'>
   <div class="row text-left">

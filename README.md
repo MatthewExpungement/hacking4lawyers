@@ -15,12 +15,18 @@ docker exec -it hacking4lawyers_webapp_1 bash
 cd app_backend
 bash create_sql.sh 
 ```
-
+Create a new mysql user from commandline.
+```
+mysql -u root -p
+CREATE USER 'matthew' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON *.* TO 'matthew';
+FLUSH PRIVILEGES;
+```
 
 # Topics Covered
 ## Case Search Page
 
-### Case Search JavaScript Manipulation
+### Case Search Form Field Manipulation
 
 Although the dropdown on the case search page only has the options of 5 or 10 results. 
 You can use inspect on chrome to modify the value of the dropdown to be any number.
@@ -70,7 +76,7 @@ fakecasenumber'; GRANT ALL PRIVILEGES ON *.* TO 'hackerman'@'localhost' IDENTIFI
 
 ## Blog Post Site
 
-### Cookie Manipulation
+### Cookie Poisoning
 When the user logs in a cookie is set with the users username. This can be modified to be any user, thus becoming that user.
 
 ### SQL Injection
@@ -164,10 +170,23 @@ This compares the hashes of the words in `wordlist.txt` to the hashes in `secret
 
 If `hashcat` can find a word in `wordlist.txt` with a hash that matches one in `secrets.md5`, it knows that hash came from the word in the wordlist.
 
+## Classified Portal Page
+This one is located at /blog/classified_portal.php and is designed to demonstrate how Chelsea Manning used wget to login and download Classified PDFs.
+The page with all the documents is also left exposed if you go directly to the URL at https://hacking4lawyers.com/blog/classified_documents/.
 
+## Article Paywall
+The article at https://hacking4lawyers.com/blog/article.php is set to throw up a login paywall after 3 seconds. You can bypass it by switching your user-agent to "Google Bot" or by usign javascript to disable the modal. Discussion should be around DMCA and whether our technique bypasses a technological measure and what the copyrighted material is.
+
+## Event Page
+Change the user-agent to view the page. This can be done by chrome extension or chrome developer tools. Discuss if this is a CFAA or DMCA violation.
+
+In order to be more helpful the form autopopulates if there is an ID in the URL as a GET parameter. This can be used to pull PII out of the db. This replicates the AT&T hack. blog/event.php?ID=1
 
 ## To Do:
 1. I think the blog site should have additional options if the user is "admin". Then using the cookie trick you can log in as admin and delete posts.
 2. I think real world examples of each of these would be useful. Show an example then show a news clip of a company that actually had this vulnerability.
 3. I'd like to demonstrate a man in the middle attack. Maybe brining our own wireless network? 
 4. Showing a password cracker live in the background somehow that we start at the beginning and check how many we've cracked at the end would be cool.
+5. Add a privacy policy.
+6. Make the bypass javascript validation more interersting.
+7. Add the ability to see the two prime numbers and final number multiplied together for RSA encryption on the passwords.php page.

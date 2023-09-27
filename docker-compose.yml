@@ -5,9 +5,9 @@ services:
             context: .
             dockerfile: Dockerfile
         environment:
-            - MYSQL_USER_NAME=mysql
+            - MYSQL_USER_NAME=mysql_user
             - MYSQL_USER_DB=mysql
-            - MYSQL_USER_PASS=mysql
+            - MYSQL_USER_PASS=808Ya6M2T0SVmoIw
         ports:
             - "80:80"
             - "443:443"

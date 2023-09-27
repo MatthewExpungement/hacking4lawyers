@@ -21,10 +21,26 @@ include "../resources/header.html";
   <header class="bg-primary text-white">
     <div class="container text-center">
       <h1>Attorney Blog Site</h1>
-      <p class="lead">Where attorneys can vent!</p>
+      <p class="lead"><i class="bi bi-lock"></i>Where attorneys can vent safely and securly!<i class="bi bi-lock"></i></p>
+      <div class="row">
+        <div class="col-lg-4 ">
+            </br>
+            <a href="/blog/event.php" class="btn btn-success">Sign Up for Our Conference</a></br>
+        </div>
+        <div class="col-lg-4 ">
+            </br>
+            <a href="/blog/classified_portal.php" class="btn btn-danger">View Our Top Secret Documents</a></br>
+        </div>
+        <div class="col-lg-4 ">
+            </br>
+            <a href="/blog/article.php" class="btn btn-warning">Keep up with the Latest News!</a></br>
+        </div>
+</div>
+ 
     </div>
   </header>
   <div class="container">
+
       <div class="row">
         <div class="col-lg-6 ">
 <?php
@@ -93,6 +109,7 @@ if(isset($_COOKIE['username']) || $login == True){
         </div>';
 
 }else{
+    //No login so give the prompts to login.
     echo '<div class="form-group">
             <h2> Please Login </h2>
             <form method = "post" action="index.php">

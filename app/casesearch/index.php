@@ -92,6 +92,55 @@ require('../resources/header.html');
     </div>
   </div>
 </div>
+<!-- Bootstrap Modal -->
+<div class="modal fade" id="captchaModal" tabindex="-1" aria-labelledby="captchaModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="captchaModalLabel">Human Test!</h5>
+      </div>
+      <div class="modal-body">
+        <p>Solve the math problem to prove you're human: <span id="math-problem"></span></p>
+        <input type="number" id="math-answer" class="form-control">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="submit-button">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  let activeForm; // This will hold the current active form
+  $(document).ready(function() {
+    $("form").on("submit", function(e) {
+      e.preventDefault(); // Prevent the form from submitting
+      activeForm = this; // Store reference to the current form
+      
+      // Generate a simple math problem
+      const num1 = Math.floor(Math.random() * 10);
+      const num2 = Math.floor(Math.random() * 10);
+      $("#math-problem").text(`${num1} + ${num2}`);
+      
+      // Show the modal
+      $("#captchaModal").modal('show');
+    });
+    
+    $("#submit-button").on("click", function() {
+      // Validate the answer
+      const [num1, num2] = $("#math-problem").text().split(' + ');
+      const userAnswer = parseInt($("#math-answer").val());
+      
+      if (userAnswer === (parseInt(num1) + parseInt(num2))) {
+        // If correct, submit the form
+        activeForm.submit();
+      } else {
+        alert("You must be a bot!");
+        $("#captchaModal").modal('hide');
+      }
+    });
+  });
+</script>
 <?php
 require('../resources/footer.html');
 ?>

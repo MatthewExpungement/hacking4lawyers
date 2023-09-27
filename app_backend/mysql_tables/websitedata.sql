@@ -580,22 +580,27 @@ INSERT INTO `casedata` (`Case_Number`, `Case_Type`, `Plaintiff_Name`, `Plaintiff
 --
 
 CREATE TABLE `users` (
-  `ID` int(11) NOT NULL,
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(500) NOT NULL,
   `password` varchar(500) NOT NULL,
-  `email` varchar(500) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `email` varchar(500) NOT NULL,
+  `first_name` varchar(500) NOT NULL,
+  `last_name` varchar(500) NOT NULL,
+  `ssn` varchar(500) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`ID`, `username`, `password`, `email`) VALUES
-(1, 'testuser', '5f4dcc3b5aa765d61d8327deb882cf99', 'test@gmail.com'),
-(2, 'attorney1', '5f4dcc3b5aa765d61d8327deb882cf99', 'attorney1@hotmail.com'),
-(3, 'admin', '5f4dcc3b5aa765d61d8327deb882cf99', 'admin@admin.com'),
-(4, 'LegalHammer', '8afa847f50a716e64932d995c8e7435a', 'legalhammer@gmail.com'),
-(5, 'LegalQAnon', 'e99a18c428cb38d5f260853678922e03', 'Qanon@gmail.com');
+INSERT INTO `users` VALUES 
+(1,'testuser','5f4dcc3b5aa765d61d8327deb882cf99','test@gmail.com','Frank','Smith','123-45-6789'),
+(2,'attorney1','5f4dcc3b5aa765d61d8327deb882cf99','attorney1@hotmail.com','John','Jones','444-55-6666'),
+(3,'admin','5f4dcc3b5aa765d61d8327deb882cf99','admin@admin.com','Jane','Chin','987-33-1234'),
+(4,'LegalHammer','8afa847f50a716e64932d995c8e7435a','legalhammer@gmail.com','Samantha','Kim','111-22-9847'),
+(5,'JudgeInsider','e99a18c428cb38d5f260853678922e03','LegalInsider@gmail.com','Jessica','Brown','223-43-9134');
+
 
 --
 -- Indexes for dumped tables
@@ -606,13 +611,6 @@ INSERT INTO `users` (`ID`, `username`, `password`, `email`) VALUES
 --
 ALTER TABLE `blogposts`
   ADD PRIMARY KEY (`ID`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`ID`);
-
 --
 -- AUTO_INCREMENT for dumped tables
 --

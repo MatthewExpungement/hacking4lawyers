@@ -1,2 +1,3 @@
 .env
 mysql/
+custom_scripts/venv/
