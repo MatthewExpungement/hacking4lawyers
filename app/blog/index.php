@@ -166,7 +166,7 @@ echo'<div class="form-group">
 </div>
 <div class="container">
       <div class="row">
-        <div class="col-lg-6 ">
+        <div class="col-lg-6 " id='blogs'>
 <?php
 //Show current blog posts
     $sql = $connection->query("SELECT * FROM blogposts ORDER BY ID DESC");
@@ -175,8 +175,8 @@ echo'<div class="form-group">
     foreach($fullarray as $blogpost){
         echo("<hr>");
         echo("<h2 class='text-primary'>" . $blogpost['blogtitle'] . "</h2>");
-        echo("<span> Posted By User:</span><span class='font-weight-bold'> " . $blogpost['username'] . "</span>");
-        echo("<p>" . $blogpost['blogpost'] . "</p>");
+        echo("<span> Posted By User:</span><span class='font-weight-bold username'> " . $blogpost['username'] . "</span>");
+        echo("<p class='blog_post'>" . $blogpost['blogpost'] . "</p>");
     }
 ?>
         </div>

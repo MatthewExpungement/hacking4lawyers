@@ -62,8 +62,9 @@ if(!isset($_GET['casenumber'])){
 <?php
     //casenumber=12C934902' UNION ALL SELECT Plaintiff_Address as Defendant_Name WHERE casenumber = '12C934902
     //Case_Number,Case_Type,Plaintiff_Name,Defendant_Name,Hearing_Date,Case_Description 
-    $sqlquery = "SELECT *
-    FROM casedata WHERE Case_Number = '". $_GET['casenumber'] . "'";
+
+    $sqlquery = "SELECT * FROM casedata WHERE Case_Number = '". $_GET['casenumber'] . "' and Expunged = False";
+    
     $sqlerrormessage = False;
     $returnedarray = [];
     try{
@@ -72,25 +73,35 @@ if(!isset($_GET['casenumber'])){
             if ($result = $connection->store_result()) {
                 $results = $result->fetch_all(MYSQLI_ASSOC);
                 //print_r($results[0]);
-                $returnedarray = $results;
-                echo "<h3>Case Information</h3>";
-                echo "<span class='text-primary font-weight-bold'>Case Number:</span><span id='casenumber'> " . $results[0]['Case_Number'] ."</span>\n";
-                echo "<br><span class='text-primary font-weight-bold'>Case Type:</span><span id='case_type'> " . $results[0]['Case_Type'] . "</span>\n";
-                echo "<hr>";
-                echo "<h3>Party Information</h3>";
-                echo "<br><span class='text-primary font-weight-bold'>Plaintiff Name: </span><span id='plaintiff_name'>" . $results[0]['Plaintiff_Name']. "</span>\n";
-                if($results[0]['Case_Type'] != 'Domestic Violence'){
-                    echo "<br><span class='text-primary font-weight-bold'>Plaintiff Address: </span><span id='plaintiff_address'>" . $results[0]['Plaintiff_Address']. "</span>\n";
-                }
-                echo "<br><span class='text-primary font-weight-bold'>Defendant Name: </span><span id='defendant_name'>" . $results[0]['Defendant_Name']. "</span>\n";
-                echo "<br><span class='text-primary font-weight-bold'>Defendant Address: </span><span id='defendant_address'>" . $results[0]['Defendant_Address']. "</span>\n";
-                echo "<hr>";
-                echo "<h3>Case Information</h3>";
+                if(count($results) == 0){
+                  echo '<div class="alert alert-danger">Case Not Found</div>';
 
-                echo "<br><span class='text-primary font-weight-bold'>Hearing Date: </span><span id='hearing_date'>" . $results[0]['Hearing_Date']. "</span>\n";
-                echo "<br><span class='text-primary font-weight-bold'>Case Description: </span><span id='case_description'>" . $results[0]['Case_Description']. "</span>\n";
-                print "<!--Judge Name: " . $results[0]['Judge'] . " DO NOT MAKE PUBLIC-->";
-                $result->free();
+                }else{
+                  $returnedarray = $results;
+                  echo "<h3>Case Information</h3>";
+                  echo "<span class='text-primary font-weight-bold'>Case Number:</span><span id='casenumber'> " . $results[0]['Case_Number'] ."</span>\n";
+                  echo "<br><span class='text-primary font-weight-bold'>Case Type:</span><span id='case_type'> " . $results[0]['Case_Type'] . "</span>\n";
+                  $expunged_human_readable = $results[0]['Expunged'] ? "True" : "False";
+                  echo "<br><span class='text-primary font-weight-bold'>Expunged: </span><span id='expunged'>" . $expunged_human_readable . "</span>\n";
+
+                  echo "<hr>";
+                  echo "<h3>Party Information</h3>";
+                  echo "<br><span class='text-primary font-weight-bold'>Plaintiff Name: </span><span id='plaintiff_name'>" . $results[0]['Plaintiff_Name']. "</span>\n";
+                  if($results[0]['Case_Type'] != 'Domestic Violence'){
+                      echo "<br><span class='text-primary font-weight-bold'>Plaintiff Address: </span><span id='plaintiff_address'>" . $results[0]['Plaintiff_Address']. "</span>\n";
+                  }else{
+                    echo "<br><span class='text-primary font-weight-bold'>Plaintiff Address: </span><span id='plaintiff_address'>PLAINTIFFS ADDRESS NOT SHOWN IN DV CASES</span>\n";
+                  }
+                  echo "<br><span class='text-primary font-weight-bold'>Defendant Name: </span><span id='defendant_name'>" . $results[0]['Defendant_Name']. "</span>\n";
+                  echo "<br><span class='text-primary font-weight-bold'>Defendant Address: </span><span id='defendant_address'>" . $results[0]['Defendant_Address']. "</span>\n";
+                  echo "<hr>";
+                  echo "<h3>Case Information</h3>";
+
+                  echo "<br><span class='text-primary font-weight-bold'>Hearing Date: </span><span id='hearing_date'>" . $results[0]['Hearing_Date']. "</span>\n";
+                  echo "<br><span class='text-primary font-weight-bold'>Case Description: </span><span id='case_description'>" . $results[0]['Case_Description']. "</span>\n";
+                  print "<!--Judge Name: " . $results[0]['Judge'] . " DO NOT MAKE PUBLIC-->";
+                  $result->free();
+                }
             }
         }else{
             $sqlerrormessage = $connection->error;

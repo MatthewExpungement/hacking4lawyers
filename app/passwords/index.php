@@ -169,6 +169,8 @@
                   <button id="hash_button" type="submit" class="btn btn-primary">Hash</button>
               </form>
                 <br><br>
+                <p>Binary Value (Should be the number of bits it is encrypted.)</p>
+                <textarea disabled rows="3" cols="50" id='hash_encrypted_binary'></textarea>
                 <p>*Value is hexidecimal encoded. 4 bits per hexidecimal value.</p>
                 <textarea disabled rows="4" cols="50" id='hash_encrypted'></textarea>
             </div>
@@ -403,6 +405,9 @@ $(document).ready(function(){
                 // Populate the 'public_private_encrypted_text' textarea with the response
                 console.log("Success " + response);
                 $('#hash_encrypted').text(response);
+                var binaryResult = hexToBinary(response);
+                $('#hash_encrypted_binary').text(binaryResult);
+                
                 console.log(parseInt(response, 16).toString(2).padStart(response.length * 4, '0'));
             },
             error: function(request, status, error){
@@ -411,5 +416,16 @@ $(document).ready(function(){
         });
     });
   });
+  function hexToBinary(hex) {
+    // Remove leading "0x" if present
+    hex = hex.replace(/^0x/, '');
 
+    // Convert each hex digit to a 4-bit binary representation
+    return hex.split('').map(char => {
+        // Parse the hex character to a number and convert to binary
+        const binary = parseInt(char, 16).toString(2);
+        // Pad with leading zeros to ensure each digit is 4 bits
+        return binary.padStart(4, '0');
+    }).join('');
+  }
 </script>

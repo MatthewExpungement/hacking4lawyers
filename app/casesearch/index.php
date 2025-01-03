@@ -18,7 +18,7 @@ require('../resources/header.html');
             <form method = "GET" action="casepage.php">
               <label for "casenumber">Case Number:</label><br>
               <input id="casenumber" type="text" name="casenumber" class="form-control">
-              <small id="emailHelp" class="form-text text-muted">Try 12C934912 if you need a case number.</small>
+              <small id="emailHelp" class="form-text text-muted">Try 12C934911 if you need a case number.</small>
               <br><br>
               <button type="submit" class="btn btn-primary">Search</button>
             </form>
@@ -110,7 +110,7 @@ require('../resources/header.html');
     </div>
   </div>
 </div>
-<script>
+<!-- <script>
   let activeForm; // This will hold the current active form
   $(document).ready(function() {
     $("form").on("submit", function(e) {
@@ -140,7 +140,8 @@ require('../resources/header.html');
       }
     });
   });
-</script>
+</script> -->
 <?php
 require('../resources/footer.html');
 ?>
+
