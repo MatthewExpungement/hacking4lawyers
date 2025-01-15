@@ -64,7 +64,7 @@ if(!isset($_GET['casenumber'])){
     //Case_Number,Case_Type,Plaintiff_Name,Defendant_Name,Hearing_Date,Case_Description 
 
     $sqlquery = "SELECT * FROM casedata WHERE Case_Number = '". $_GET['casenumber'] . "' and Expunged = False";
-    
+    //echo $sqlquery;
     $sqlerrormessage = False;
     $returnedarray = [];
     try{

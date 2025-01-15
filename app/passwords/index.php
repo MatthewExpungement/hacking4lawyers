@@ -111,6 +111,9 @@
                   <label for "public_key_response">Public Key:</label><br>
                   <textarea rows="10" cols="50" id='public_key_response' name='public_key_response'></textarea>
                   <br>
+                  <label for "public_key_number">Public Key:</label><br>
+                  <textarea rows="3" cols="50" id='public_key_number' name='public_key_number'></textarea>
+                  <br>
                   <label for "public_key_encrypt">Text to Encrypt:</label><br>
                   <input id="public_key_encrypt" type="text" name="public_key_encrypt" class="form-control">
 
@@ -126,6 +129,12 @@
               <form id='public_private_key_form_decrypt'>
                   <label for "private_key_response">Private Key:</label><br>
                   <textarea rows="10" cols="50" id='private_key_response' name='private_key_response'></textarea>
+                  <br>
+                  <label for "prime_number1">Prime Number 1:</label><br>
+                  <textarea rows="3" cols="50" id='prime_number1' name='prime_number1'></textarea>
+                  <br>
+                  <label for "prime_number2">Prime Number 2:</label><br>
+                  <textarea rows="3" cols="50" id='prime_number2' name='prime_number2'></textarea>
                   <br>
                   <label for "private_decrypt_text">Text to Decrypt:</label><br>
                   <input id="private_decrypt_text" type="text" name="private_decrypt_text" class="form-control">
@@ -304,10 +313,19 @@ $(document).ready(function(){
                 dataType: 'json',
                 success: function(response){
                   console.log(response);
-                    $('#private_key_response').val(response.private);
-                    $('#public_key_response').val(response.public);
+                  $('#private_key_response').val(response.private);
+                  $('#public_key_response').val(response.public);
+                  var converted_prime_number1 = BigInt(`0x${response.prime_number1}`);
+                  var converted_prime_number2 = BigInt(`0x${response.prime_number2}`);
+
                   console.log(response.prime_number1);
                   console.log(response.prime_number2);
+                  $("#prime_number1").val(converted_prime_number1.toString());
+                  $("#prime_number2").val(converted_prime_number2.toString());
+                  var public_key_number = converted_prime_number1 * converted_prime_number1;
+                  console.log("Public Key Number: " + public_key_number);
+                  $("#public_key_number").val(public_key_number.toString());
+
                 },
                 error: function(request, status, error){
                     console.error("AJAX request failed: " + status + ", Error: " + error);
